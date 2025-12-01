@@ -10,6 +10,10 @@ app.post("/", (req, res)=>{
     console.log("This is a POST request")
 });
 
+app.delete("/", (req, res)=>{
+    console.log( "This is DELETE request")
+});
+
 
 
 app.listen(3000,()=>{
