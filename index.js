@@ -19,7 +19,7 @@ connection.once("open", ()=>{
 app.get("/", (req, res)=>{
     console.log( "That is a GET request!")
     res.json( {
-        message : "Good morning " + req.body.Name
+        message : "Good morning " + req.body.name
     })
 });
 
