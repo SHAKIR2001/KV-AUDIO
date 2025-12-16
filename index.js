@@ -52,7 +52,7 @@ app.post("/", (req, res)=>{
 });
 
 app.delete("/", (req, res)=>{
-    console.log( "This is DELETE a request")
+    console.log( "This is a DELETE request")
 });
 
 
