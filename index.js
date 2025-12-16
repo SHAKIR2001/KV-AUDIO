@@ -17,10 +17,27 @@ connection.once("open", ()=>{
 
 
 app.get("/", (req, res)=>{
-    console.log( "That is a GET request!")
-    res.json( {
-        message : "Good morning " + req.body.name
+        let studentSchema = mongoose.Schema({
+        name: String,
+        age: Number,
+        height : Number
     })
+
+    let Student = mongoose.model("students",studentSchema); //create the connection between our schema and the collection(in DB)
+
+    Student.find().then(
+        (result)=>{
+            res.json(result)
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                message: "Students cannont be find"
+            })
+        }
+
+    )
+
 });
 
 app.post("/", (req, res)=>{
@@ -30,7 +47,7 @@ app.post("/", (req, res)=>{
         height : Number
     })
 
-    let Student = mongoose.model("students",studentSchema); //create the connection between our schema and the DB
+    let Student = mongoose.model("students",studentSchema); //create the connection between our schema and the collection(in DB)
 
     let newStudent = req.body
 
