@@ -1,6 +1,6 @@
 import express from "express"
-import { getStudents } from "../controllers/studentController.js"
-import { postStudents } from "../controllers/studentController.js"
+import { getStudents,postStudents } from "../controllers/studentController.js"
+
 
 let studentRouter = express.Router()
 

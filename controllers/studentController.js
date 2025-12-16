@@ -1,12 +1,26 @@
+import Student from "../models/student.js"
 export function getStudents(req,res){
-    res.json({
-        message: "This is a get request from student route"
-    })
+    Student.find().then(
+        (result)=>{
+            res.json(result)
+        }
+    )
 }
 
 export function postStudents(req,res){
-    res.json({
-        message: "This is a post request from student route"
-    })
+    let StudentData = req.body;
+    let student = new Student(studentData)
+
+    student.save().then(
+        res.json({
+            message : "Studnet save successfully"
+        })
+    ).catch(
+        res.json({
+            message : "Student cannot be saved"
+        })
+    )
+
+
 }
 
