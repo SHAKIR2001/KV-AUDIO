@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import Student from "./models/student.js";
+import studentRouter from "./routes/studentRoute.js";
 
 let app = express();
 
@@ -16,48 +16,7 @@ connection.once("open", ()=>{
     console.log("MongoDB connected successfully ✅")
 });
 
-
-app.get("/", (req, res)=>{
-    Student.find().then(
-        (result)=>{
-            res.json(result)
-        }
-    ).catch(
-        ()=>{
-            res.json({
-                message: "Students cannont be find"
-            })
-        }
-
-    )
-
-});
-
-app.post("/", (req, res)=>{
-    let newStudent = req.body
-
-    let student = new Student(newStudent)
-
-    student.save().then(
-        ()=>{
-            res.json({
-                message: "Student save successfully"
-            })
-        }
-    ).catch( ()=>{
-        res.json(
-            {
-                message : "Student cannot be saved"
-            }
-        )
-    })
-});
-
-app.delete("/", (req, res)=>{
-    console.log( "This is a DELETE request")
-});
-
-
+app.use("/students", studentRouter)
 
 app.listen(3000,()=>{
     console.log("Server is running on PORT 3000 🚀")
