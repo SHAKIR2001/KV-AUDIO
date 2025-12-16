@@ -13,7 +13,7 @@ mongoose.connect(mongoUrl);
 
 let connection =  mongoose.connection
 connection.once("open", ()=>{
-    console.log("MongoDB connected successfully")
+    console.log("MongoDB connected successfully ✅")
 });
 
 
@@ -60,5 +60,5 @@ app.delete("/", (req, res)=>{
 
 
 app.listen(3000,()=>{
-    console.log("Server is running on PORT 3000")
+    console.log("Server is running on PORT 3000 🚀")
 });
