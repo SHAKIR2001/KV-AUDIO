@@ -31,7 +31,7 @@ export function loginUser(req,res){
     User.findOne({
         email : data.email
     }).then(
-        (user)=>{
+        (user)=>{ //email porundhum user irundhal andha user in ella data waiyum (user) inkul save seyyappadum
             if (user == null){
                 res.status(404).json({
                     error : "User not found"
