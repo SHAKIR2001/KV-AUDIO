@@ -4,6 +4,12 @@ export function getStudents(req,res){
         (result)=>{
             res.json(result)
         }
+    ).catch(
+       (error)=>{
+        res.status(500).json({
+            message : "Students cannot be found"
+        })
+       }
     )
 }
 
