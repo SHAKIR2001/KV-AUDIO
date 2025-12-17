@@ -4,7 +4,7 @@ export function registerUser(req,res){
 
     const data = req.body;
 
-    data.password = bcrypt.hashSync(data.password,10)
+    data.password = bcrypt.hashSync(data.password,10) //10 = solting rounds
 
     const newUser = new User(data)
 
