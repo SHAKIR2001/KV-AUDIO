@@ -24,3 +24,34 @@ export function registerUser(req,res){
     )
 
 }
+
+export function loginUser(req,res){
+    const data = req.body;
+
+    User.findOne({
+        email : data.email
+    }).then(
+        (user)=>{
+            if (user == null){
+                res.status(404).json({
+                    error : "User not found"
+                })
+            }else{
+               const isPassowrdCorrect = bcrypt.compareSync(data.password,user.password);
+
+                if (isPassowrdCorrect){
+                    res.json({
+                        message : "Login successful"                 
+                    })
+                }else{
+                    res.json({
+                        error : "login failed"
+                    })
+                }
+
+
+
+            }
+        }
+    )
+}
