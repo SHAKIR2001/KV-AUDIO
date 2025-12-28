@@ -48,9 +48,6 @@ export function loginUser(req,res){
                         error : "login failed"
                     })
                 }
-
-
-
             }
         }
     )
