@@ -1,6 +1,7 @@
 import Product from "../models/product.js"
 
 export function addProduct(req,res){
+
     const data = req.body
     const newProduct = new Product(data)
     newProduct.save().then(
@@ -9,13 +10,19 @@ export function addProduct(req,res){
                 {
                     message : "Product added successfully"
                 }
-            ).catch(
-                (error)=>{
-                    res.status(500).json({
-                        error : "Can not add the Product"
-                    })
+            )
+        }
+    ).catch(
+        (error)=>{
+            res.status(500).json(
+                {
+                    error : "Can not add the Product"
                 }
             )
         }
     )
+
 }
+
+
+
