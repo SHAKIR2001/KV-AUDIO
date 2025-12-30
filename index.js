@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken"
 const app = express();
 
 app.use(bodyParser.json());  //idhu app = express in pirahu koduttal wendum aduththa requests(GET,POST,PUT,DELETE) nadakka mun
-app.use( (req,res,next)=>{  //Authentication
+app.use( (req,res,next)=>{  //Authentication (identify the users)
 
     let token = req.header("Authorization")
     
