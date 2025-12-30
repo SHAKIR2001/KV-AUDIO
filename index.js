@@ -3,11 +3,27 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js"
 import productRouter from "./routes/productRoute.js";
+import jwt from "jsonwebtoken"
 
 
 const app = express();
 
 app.use(bodyParser.json());  //idhu app = express in pirahu koduttal wendum aduththa requests(GET,POST,PUT,DELETE) nadakka mun
+app.use( (req,res,next)=>{
+
+    let token = req.header("Authorization")
+    
+    if (token != null){
+        token = token.replace("Bearer ","")
+
+        jwt.verify(token, "kv-secret-89!",
+        (err,decoded)=>{
+            if(!err){
+                console.log(decoded);
+            }
+        });
+    }
+})
 
 let mongoUrl = "mongodb+srv://admin:123@cluster0.hjazmey.mongodb.net/?appName=Cluster0"
 
