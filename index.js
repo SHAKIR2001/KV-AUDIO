@@ -14,16 +14,18 @@ app.use( (req,res,next)=>{
     let token = req.header("Authorization")
     
     if (token != null){
-        token = token.replace("Bearer ","")
+        token = token.replace("Bearer ","") //Bearer (space) endrathei remove seidhal
 
         jwt.verify(token, "kv-secret-89!",
         (err,decoded)=>{
             if(!err){
-                console.log(decoded);
+               req.user = decoded;
+               
             }
         });
     }
-})
+    next()
+});
 
 let mongoUrl = "mongodb+srv://admin:123@cluster0.hjazmey.mongodb.net/?appName=Cluster0"
 
