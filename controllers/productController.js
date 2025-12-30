@@ -6,7 +6,14 @@ export function addProduct(req,res){
         res.status(401).json({
             message : "Please login and try again"
         })
-        return //add return to close the function so another codesd not run
+        return //add return to close the function so other codes not run
+    }
+
+    if(req.user.role != "admin"){
+        res.status(401).json({
+            message : "You are not authorized to perform this action"
+        })
+        return //add return to close the function so other codes not run
     }
 
     const data = req.body
