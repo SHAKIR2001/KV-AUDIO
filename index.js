@@ -1,11 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import userRouter from "./routes/userRouter.js"
+import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRoute.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-
+dotenv.config(); //use to access the values in .env file
 const app = express();
 
 app.use(bodyParser.json());  //idhu app = express in pirahu koduttal wendum aduththa requests(GET,POST,PUT,DELETE) nadakka mun
@@ -27,8 +28,7 @@ app.use( (req,res,next)=>{  //Authentication (identify the users)
     next()
 });
 
-let mongoUrl = "mongodb+srv://admin:123@cluster0.hjazmey.mongodb.net/?appName=Cluster0"
-
+let mongoUrl = process.env.MONGO_URL;
 mongoose.connect(mongoUrl);
 
 let connection =  mongoose.connection
