@@ -3,8 +3,10 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRoute.js";
+import reviewRouter from "./routes/reviewRouter.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+
 
 dotenv.config(); //use to access the values in .env file
 const app = express();
@@ -39,6 +41,7 @@ connection.once("open", ()=>{
 
 app.use("/api/users", userRouter)
 app.use("/api/products", productRouter)
+app.use("/api/reviews", reviewRouter)
 
 app.listen(3000,()=>{
     console.log("Server is running on PORT 3000 🚀")
