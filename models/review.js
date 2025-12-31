@@ -27,8 +27,13 @@ const reviewSchema =  new mongoose.Schema({
         type : Date,
         required : true,
         default : Date.now() //get the current date
-    }
+    },
 
+    isApproved : {
+        type : Boolean,
+        required : true,
+        default : false
+    }
 
 })
 
