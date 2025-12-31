@@ -29,6 +29,12 @@ const reviewSchema =  new mongoose.Schema({
         default : Date.now() //get the current date
     },
 
+    profilePicture : {
+        type : String,
+        required : true,
+        default : "http://www.shrek.lk"
+    },
+
     isApproved : {
         type : Boolean,
         required : true,
