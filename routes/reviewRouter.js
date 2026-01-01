@@ -6,6 +6,6 @@ const reviewRouter = express.Router();
 reviewRouter.post("/", addReview)
 reviewRouter.get("/", getReviews)
 reviewRouter.delete("/:email", deleteReview)
-reviewRouter.put("/:email", approveReview)
+reviewRouter.put("/approve/:email", approveReview)
 
 export default reviewRouter;
