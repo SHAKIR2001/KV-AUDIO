@@ -12,7 +12,7 @@ export function addReview(req,res){
 
     data.name = req.user.firstName + " " + req.user.lastName; //ingu review podum naparin fistname + last name ei eduththu review il ulla name itku koduththal
     data.profilePicture = req.user.profilePicture;
-    data.email = req.user.emaill;
+    data.email = req.user.email;
 
     const newReview = new Review(data)
 
