@@ -63,11 +63,12 @@ export function deleteReview(req,res){
     }
 
     if(req.user.role == "admin"){
-    Review.deleteOne({email : email}).then(
-        res.json({
-            message : "Review deleted siccessfully"
+    Review.deleteOne({email : email}).then( ()=>{
+            res.json({
+            message : "Review deleted successfully"
         })
-    ).catch(
+    }
+     ).catch(
         (error)=>{
             res.status(500).json({
                 error : "Review can not be deleted"
@@ -87,7 +88,7 @@ export function deleteReview(req,res){
             ).catch(
                 (error)=>{
                     res.status(500).json(
-                        ()=>{
+                        {
                             error : "Review can not be deleted"
                         }
                     )
@@ -111,7 +112,7 @@ export function approveReview(req,res){
 
     if(req.user == null){
         res.status(401).json(
-            ()=>{
+            {
                 message : "Please login and try again"
             }
         )
@@ -144,7 +145,7 @@ export function approveReview(req,res){
 
     } else{
         res.status(403).json(
-            ()=>{
+            {
               message : "Yor are not an admin, only the admins can approve the reviews"
             }
         )
