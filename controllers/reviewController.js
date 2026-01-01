@@ -119,9 +119,34 @@ export function approveReview(req,res){
     }
 
     if(req.user.role == "admin"){
+        Review.updateOne({
+            email : email  //1st il ulla email database il ulladhei kurikkum irandaawadhu req.params.email il irundu eduththa emailei kurikkum (check bothe are same) 
+        },
+        {
+            isApproved : true, //update the chnages here 
+        }).then(
+            ()=>{
+                res.json(
+                    {
+                        message : "Review approved successfully"
+                    }
+                )
+            }
+        ).catch(
+            (error)=>{
+                res.status(500).json(
+                    {
+                        error : "Review approval failed"
+                    }
+                )
+            }
+        )
 
+    } else{
+        res.status(403).json(
+            ()=>{
+              message : "Yor are not an admin, only the admins can approve the reviews"
+            }
+        )
     }
-
-        
-
 }
