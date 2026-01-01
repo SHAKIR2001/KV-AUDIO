@@ -49,3 +49,19 @@ export function getReviews(req,res){
     }
 
 }
+
+export function deleteReview(req,res){
+    const email = req.params.email
+
+    Review.deleteOne({email : email}).then(
+        res.json({
+            message : "Review deleted siccessfully"
+        })
+    ).catch(
+        (error)=>{
+            res.status(500).json({
+                error : "Review can not be deleted"
+            })
+        }
+    )
+}
