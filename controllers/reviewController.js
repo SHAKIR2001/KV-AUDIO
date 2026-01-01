@@ -105,3 +105,23 @@ export function deleteReview(req,res){
         }
     }
 }
+
+export function approveReview(req,res){
+    const email = req.params.email
+
+    if(req.user == null){
+        res.status(401).json(
+            ()=>{
+                message : "Please login and try again"
+            }
+        )
+        return
+    }
+
+    if(req.user.role == "admin"){
+
+    }
+
+        
+
+}
