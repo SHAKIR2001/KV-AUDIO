@@ -37,6 +37,3 @@ export function addProduct(req,res){
     )
 
 }
-
-
-

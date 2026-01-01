@@ -30,3 +30,22 @@ export function addReview(req,res){
         }
     )
 }
+
+export function getReviews(req,res){
+    const user = req.user;
+
+    if (user == null || user.role != "admin"){ //only run if user doesn't login or the user is not an admin
+        Review.find({isApproved : true }).then(
+            (reviews)=>{
+                res.json(reviews)
+            }
+        )
+    } else{
+        Review.find().then(
+            (reviews)=>{
+                res.json(reviews)
+            }
+        )
+    }
+
+}
