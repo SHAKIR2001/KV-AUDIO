@@ -31,23 +31,21 @@ export function addReview(req,res){
     )
 }
 
-export function getReviews(req,res){
+export async function getReviews(req,res){
     const user = req.user;
 
-    if (user == null || user.role != "admin"){ //only run if user doesn't login or the user is not an admin
-        Review.find({isApproved : true }).then(
-            (reviews)=>{
-                res.json(reviews)
-            }
-        )
-    } else{
-        Review.find().then(
-            (reviews)=>{
-                res.json(reviews)
-            }
-        )
-    }
+    try{
+        if( req.user.role == "admin"){
+            const reviews = await Review.find();
+            res.json(reviews)
+        }else{
+            const reviews = await Review.find({isApproved : true})
+            res.json(reviews)
+        }
 
+    }catch(e){
+        res.status(500).json({error : "Review loading failed"})
+    }
 }
 
 export function deleteReview(req,res){
