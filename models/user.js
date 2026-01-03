@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     profilePicture : {
         type : String,
         required : true,
-        default : "https://i.pinimg.com/736x/e1/e1/af/e1e1af3435004e297bc6067d2448f8e5.jpg" //i got this from google
+        default : "https://i.pinimg.com/736x/e1/e1/af/e1e1af3435004e297bc6067d2448f8e5.jpg" 
     }
 
 });
