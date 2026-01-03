@@ -20,7 +20,7 @@ export async function addProduct(req,res){
     const newProduct = new Product(data)
 
     try{
-        await newProduct.save();
+        await newProduct.save();  //try async await
         res.json({
             message : "Product added successfully"
         })
