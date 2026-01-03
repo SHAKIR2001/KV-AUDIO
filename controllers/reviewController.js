@@ -34,9 +34,12 @@ export function addReview(req,res){
 export async function getReviews(req,res){
     const user = req.user;
 
-    const reviews = await Review.find();
-    res.json(reviews)
-
+    try{
+        const reviews = await Review.find();
+        res.json(reviews)
+    }catch(e){
+        res.status(500).json({error : "Review loading failed"})
+    }
 }
 
 export function deleteReview(req,res){
