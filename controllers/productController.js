@@ -22,7 +22,7 @@ export async function addProduct(req,res){
     try{
         await newProduct.save();  
         res.json({
-            message : "Product added successfully"
+            message : "Product added successfully" //atry asyn await
         })
 
     }catch(e){
