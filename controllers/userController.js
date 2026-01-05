@@ -66,9 +66,8 @@ export function isItADMIN(req){
 
     if(req.user != null){
         if(req.user.role == "admin"){
-            isadmin = true
+            isAdmin = true
         }
     }
-
     return isAdmin
 }
