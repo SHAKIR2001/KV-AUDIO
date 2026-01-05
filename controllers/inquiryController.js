@@ -98,3 +98,37 @@ export async function deleteInquiry(req,res){
         res.status(500).json({message :  "Inquiry cannot be deleted"})
     }
 }
+
+export async function updateInquiry(req,res){
+    try{
+        if(isItADMIN(req)){
+            const data = req.body
+            const id = req.params.id
+
+            await Inquiry.updateOne({id:id},data)   // customer can change everything
+            res.json({message : "Inquiry updated successfully"})
+
+        }else if(isItCustomer(req)){
+            const data = req.body
+            const id = req.params.id
+
+            const inquiry = await Inquiry.findOne({id:id})
+
+            if(inquiry == null) {
+                res.status(404).json({message : "Inquiry not found"})
+                return
+            }else{
+                if(inquiry.email == req.user.email){
+                    await Inquiry.updateOne({id:id}, {message : data.message})  //only cutomer can change message , even he provide the whole body 
+                    return
+                }else{
+                    res.status(403).json({message : "You are not authorized to perform this action"})
+                    return
+                }
+            }
+
+        }
+    }catch(e){
+        res.status(500).json({message : "Inquiry cann ot be upadted"})
+    }
+}
