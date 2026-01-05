@@ -23,19 +23,19 @@ const inquirySchema =  new mongoose.Schema({
     date : {
         type : Date,
         required : true,
-        dafault : Date.now()
+        default : Date.now
     },
 
     responce : {
         type : String,
         required : false,
-        dafault : ""
+        default : ""
     },
 
     isResolved : {
         type : Boolean,
         required : true,
-        dafault : false
+        default : false
     }
 
 });
