@@ -32,3 +32,17 @@ export async function addProduct(req,res){
 
     }
 }
+
+export async function getProducts(req,res){
+
+    try{
+        const products = await Product.find()
+        res.json(products)
+
+    }catch(e){
+        res.status(500).json({
+            message : "failed to get Products"
+        })
+    }
+
+}
