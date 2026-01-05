@@ -70,7 +70,7 @@ export async function deleteInquiry(req,res){
 
         }else if (isItCustomer(req)){
             const id = req.params.id
-            const inquiry = await Inquiry.find({id:id})
+            const inquiry = await Inquiry.findOne({id:id})
 
             if ( inquiry == null){
                 res.status(404).json({
