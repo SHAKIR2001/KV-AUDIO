@@ -38,6 +38,12 @@ const productSchema = new mongoose.Schema({
         type : Boolean,
         required : true,
         default : true
+    },
+
+    image : {
+        type : String,
+        required : true,
+        default : "https://m.media-amazon.com/images/I/713TUYjagQL._AC_SY300_SX300_QL70_FMwebp_.jpg"
     }
 })
 
