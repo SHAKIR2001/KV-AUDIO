@@ -120,6 +120,7 @@ export async function updateInquiry(req,res){
             }else{
                 if(inquiry.email == req.user.email){
                     await Inquiry.updateOne({id:id}, {message : data.message})  //only cutomer can change message , even he provide the whole body 
+                    res.json({message : "Inquiry upadted successfully"})
                     return
                 }else{
                     res.status(403).json({message : "You are not authorized to perform this action"})
@@ -127,6 +128,8 @@ export async function updateInquiry(req,res){
                 }
             }
 
+        }else{
+            res.status(403).json({message : "You are not authorized to perform this action"})
         }
     }catch(e){
         res.status(500).json({message : "Inquiry cann ot be upadted"})
