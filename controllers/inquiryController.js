@@ -39,7 +39,7 @@ export async function addInquiry(req,res){
     }
 }
 
-export async function getInqury(req,res){
+export async function getInquiry(req,res){
     try{
         if(isItADMIN(req)){
             const inquiries = await Inquiry.find();
@@ -57,4 +57,44 @@ export async function getInqury(req,res){
         res.status(500).json({message : "Failed to get inquiries"})
     }
 
+}
+
+export async function deleteInquiry(req,res){
+    try{
+        if(isItADMIN(req))
+        {
+            const id = req.params.id
+
+            await Inquiry.deleteOne({id:id})
+            res.json({message : "Inquiry deleted successfully"})
+
+        }else if (isItCustomer(req)){
+            const id = req.params.id
+            const inquiry = await Inquiry.find({id:id})
+
+            if ( inquiry == null){
+                res.status(404).json({
+                    message : "Inquiry not found"
+                })
+                return;
+            }else{
+                if(inquiry.email == req.user.email){
+                    await Inquiry.deleteOne({id:id})
+                    res.json({
+                        message : "Inquiry deleted successfully"
+                    })
+                    return
+                }else{
+                    res.status(403).json({message : "You are not authorized to perform this action"})
+                    return;
+                }
+            }
+        }else{
+            res.status(403).json({message : "You are not authorized to perfrom this action"})
+            return
+        }
+
+    }catch(e){
+        res.status(500).json({message :  "Inquiry cannot be deleted"})
+    }
 }
