@@ -11,8 +11,8 @@ const inquirySchema =  new mongoose.Schema({
 
     email : {
         type : String,
-        required : true,
-        unique : true
+        required : true, //unique true kudukkaameiku kaarnam :-oru user many reviews poda mudiyumaaha irukka wendum
+        
     },
 
     message : {
