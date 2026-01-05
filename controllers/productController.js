@@ -1,4 +1,5 @@
 import Product from "../models/product.js"
+import { isItADMIN } from "./userController.js"
 
 export async function addProduct(req,res){
 
@@ -34,17 +35,8 @@ export async function addProduct(req,res){
 }
 
 export async function getProducts(req,res){
-
-    let isAdmin =  false;
-
-    if(req.user != null){
-        if(req.user.role == "admin"){
-            isAdmin = true
-        }
-    }
-
     try{
-        if(isAdmin == true){
+        if(isItADMIN(req)){
             const products = await Product.find()
             res.json(products)
         }else{
