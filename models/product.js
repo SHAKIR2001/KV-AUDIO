@@ -41,9 +41,10 @@ const productSchema = new mongoose.Schema({
     },
 
     image : {
-        type : String,
+        type : [String], // [String] ivvaaru koduppadham moolam multiple images add seiyyalaam
         required : true,
-        default : "https://m.media-amazon.com/images/I/713TUYjagQL._AC_SY300_SX300_QL70_FMwebp_.jpg"
+        default : ["https://m.media-amazon.com/images/I/713TUYjagQL._AC_SY300_SX300_QL70_FMwebp_.jpg"]
+        
     }
 })
 
