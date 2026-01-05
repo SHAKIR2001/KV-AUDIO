@@ -46,7 +46,8 @@ export function loginUser(req,res){
                         lastName : user.lastName,
                         email : user.email,
                         profilePicture : user.profilePicture,
-                        role : user.role
+                        role : user.role,
+                        phone : user.phone
                     }, process.env.JWT_SECRET)
                     res.json({
                         message : "Login successful" , token : token                
@@ -81,6 +82,6 @@ export function isItCustomer(req){
             isCustomer = true
         }
     }
-    
+
     return isCustomer;
 }
