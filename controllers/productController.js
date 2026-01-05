@@ -50,3 +50,41 @@ export async function getProducts(req,res){
     }
 
 }
+
+export async function updateProducts(req,res){
+    try{
+        if(isItADMIN(req)){
+
+            const key = req.params.key
+            const data = req.body
+
+            await Product.updateOne({key:key},data)
+
+            res.json({message : "Product updated successfully"})
+
+        }else{
+            res.status(401).json({ message : "You are not authorized to perform this action"})
+        }
+
+    }catch(e){
+        res.status(500).json({ message : "Can not update the products"})
+    }
+}
+
+export async function deleteProduct(req,res){
+
+    try{
+        if(isItADMIN(req)){
+
+            const key = req.params.key
+            await Product.deleteOne({key:key})
+
+            res.json({message : "Product deleted"})
+        }else{
+            res.status(401).json({message : "You are not authorized to perform this action "})
+        }
+
+    }catch(e){
+        res.json({message : "Product cannot be deleted"})
+    }
+}
