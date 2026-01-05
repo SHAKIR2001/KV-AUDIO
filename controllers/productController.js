@@ -63,7 +63,7 @@ export async function updateProducts(req,res){
             res.json({message : "Product updated successfully"})
 
         }else{
-            res.status(401).json({ message : "You are not authorized to perform this action"})
+            res.status(403).json({ message : "You are not authorized to perform this action"})
         }
 
     }catch(e){
@@ -81,7 +81,7 @@ export async function deleteProduct(req,res){
 
             res.json({message : "Product deleted"})
         }else{
-            res.status(401).json({message : "You are not authorized to perform this action "})
+            res.status(403).json({message : "You are not authorized to perform this action "})
         }
 
     }catch(e){
