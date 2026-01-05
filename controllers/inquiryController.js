@@ -1,5 +1,6 @@
 import Inquiry from "../models/inquiry.js";
-import { isItCustomer } from "./userController.js";
+import { isItCustomer, isItADMIN } from "./userController.js";
+
 
 export async function addInquiry(req,res){
 
@@ -36,4 +37,24 @@ export async function addInquiry(req,res){
     }catch(e){
         res.status(500).json({message : "Inquiry cannot be added"})
     }
+}
+
+export async function getInqury(req,res){
+    try{
+        if(isItADMIN(req)){
+            const inquiries = await Inquiry.find();
+            res.json(inquiries)
+            
+        }else if(isItCustomer(req)){
+            const inquiries = await Inquiry.find({email : req.user.email})
+            res.json(inquiries)
+        }else{
+            res.status(403).json({
+                message : "You are not authorized to perform this action"
+            })
+        }
+    }catch(e){
+        res.status(500).json({message : "Failed to get inquiries"})
+    }
+
 }
