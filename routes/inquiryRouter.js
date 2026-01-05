@@ -5,3 +5,5 @@ const inquiryRouter = express.Router();
 
 inquiryRouter.post("/", addInquiry)
 
+export default inquiryRouter;
+
