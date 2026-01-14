@@ -7,11 +7,13 @@ import reviewRouter from "./routes/reviewRouter.js";
 import inquiryRouter from "./routes/inquiryRouter.js"
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import cors from "cors";
 
 
 dotenv.config(); //use to access the values in .env file
 const app = express();
 
+app.use(cors())
 app.use(bodyParser.json());  //idhu app = express in pirahu koduttal wendum aduththa requests(GET,POST,PUT,DELETE) nadakka mun
 app.use( (req,res,next)=>{  //Authentication (identify the users)
 
