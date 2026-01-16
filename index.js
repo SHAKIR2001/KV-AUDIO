@@ -54,7 +54,7 @@ app.listen(3000,()=>{
 
 
 /*   "email": "shakir@gmail.com",        customer
-  "password": "password123",  */
+  "password": "password123",  */ 
 
   /*    "email": "shakir077@gmail.com",    admin
     "password": "password123", */
