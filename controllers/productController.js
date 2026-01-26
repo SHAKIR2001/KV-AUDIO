@@ -92,8 +92,9 @@ export async function deleteProduct(req,res){
 export async function getProductById(req,res){
     try{
 
-        const products = await Product.find()
-        res.json(products)
+        const key = req.params.key
+        const product = await Product.findOne({key : key})
+        res.json(product)
 
     }catch(e){
         res.status(500).json({ message : "Products can not be shows"})
