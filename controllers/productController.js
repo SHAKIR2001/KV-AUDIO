@@ -88,3 +88,14 @@ export async function deleteProduct(req,res){
         res.json({message : "Product cannot be deleted"})
     }
 }
+
+export async function getProductById(req,res){
+    try{
+
+        const products = await Product.find()
+        res.json(products)
+
+    }catch(e){
+        res.status(500).json({ message : "Products can not be shows"})
+    }
+}
