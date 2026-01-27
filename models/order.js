@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
     orderDate : {
         type : Date,
         required : true,
-        dafault: Date.now()
+        dafault: Date.now
     },
 
     orderedItems : { //in here we store the perticuler items details because if we want to provide a bill then the product details in the bill should be in the same details when a ordered cant change the price or other etc.. after the order
