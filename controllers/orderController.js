@@ -31,6 +31,8 @@ export async function addOrder(req,res){
         orderInfo.orderId = "ORD" + formattedNumber
     }
 
+    let oneDayCost = 0; //oneDayCost vaiable declare for store the cost of the order (price)
+
     for(let i=0; i<data.orderedItems.length; i++){ //front endaal anuppiya product = data.orderedItems order seidha productshal
         try{
              const product = await Product.findOne({key : data.orderId[i].key}) //import product and search if there any products have related to the key that we get from order
@@ -79,6 +81,8 @@ export async function addOrder(req,res){
                 },
                 quantity : data.orderedItems[i].quantity //qiuantity get by req's body (front end)
              })
+
+             oneDayCost += product.price * data.orderedItems[i].quantity; //calculatin the total amount
 
 
 
