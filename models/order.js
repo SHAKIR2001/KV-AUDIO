@@ -8,6 +8,11 @@ const orderSchema = new mongoose.Schema({
         unique : true
     },
 
+    email : {
+        type : String, // in here we wget the user email who make the order
+        required : true
+    },
+
     orderDate : {
         type : Date,
         required : true,
