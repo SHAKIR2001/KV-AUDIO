@@ -35,11 +35,13 @@ export async function addOrder(req,res){
              const product = await Product.findOne({key : data.orderId[i].key}) //import product and search if there any products have related to the key that we get from order
 
              if (product == null){
-                res.statsu(404).json({message : "Product not found"})
+                res.statsu(404).json({message : "Product with key "+data.orderId[i].key+" not found" })
                 return
              }
 
              
+
+
 
 
         }catch(e){
