@@ -3,7 +3,7 @@ import Product from "../models/product.js";
 
 export async function addOrder(req,res){
     const data = req.body;
-    const orderInfo = {
+    const orderInfo = { //its working like dummy we just assign value to this dummy by getting from the frontend
         orderedItems : []
 
     }
