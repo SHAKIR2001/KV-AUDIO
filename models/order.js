@@ -67,6 +67,13 @@ const orderSchema = new mongoose.Schema({
     totalAmount : {
         type : Number,
         required : true
+    },
+
+    isApproved : {
+        type : Boolean,
+        required : true,
+        default : false
+
     }
 
 
