@@ -96,6 +96,14 @@ export async function addOrder(req,res){
     orderInfo.endingDate =  data.endingDate;
     orderInfo.totalAmount =  oneDayCost * data.days //calculating the total amount by  totalOneday cost * how many days they want the product(day count)
 
+    try{
+        const newOrder = new Order(orderInfo)
+        await newOrder.save();
+        res.json({message : "Order added successfully"})
+    }catch(e){
+        res.status(500).json({message : "Order can not be created"})
+    }
+
 
 
 }
