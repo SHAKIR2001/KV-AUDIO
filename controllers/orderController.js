@@ -82,7 +82,7 @@ export async function addOrder(req,res){
                 quantity : data.orderedItems[i].quantity //qiuantity get by req's body (front end)
              })
 
-             oneDayCost += product.price * data.orderedItems[i].quantity; //calculating the total amount by price and quantity 
+             oneDayCost += product.price * data.orderedItems[i].quantity; //calculating the total one day cost by Product price and quantity 
 
         }catch(e){
             res.status(500).json({message : "Can not make an order"})
@@ -94,6 +94,7 @@ export async function addOrder(req,res){
     orderInfo.days = data.days;
     orderInfo.startingDate =  data.startingDate;
     orderInfo.endingDate =  data.endingDate;
+    orderInfo.totalAmount =  oneDayCost * data.days //calculating the total amount by  totalOneday cost * how many days they want the product(day count)
 
 
 
