@@ -4,6 +4,7 @@ import Product from "../models/product.js";
 export async function addOrder(req,res){
     const data = req.body;
     const orderInfo = {
+        orderedItems : []
 
     }
 
@@ -39,7 +40,47 @@ export async function addOrder(req,res){
                 return
              }
 
-             
+/*             {
+                product : {
+                    key : {
+                        type : String,
+                        required : true
+                    },
+
+                    name : {
+                        type : String,
+                        required : true
+                    },
+
+                    image : {
+                        type : String,
+                        required : true
+                    },
+
+                        price : {
+                        type : Number,
+                        required : true
+                    }
+                },
+
+                quantity : {
+                    type : Number,
+                    required : true
+                }
+            } */
+
+
+             orderInfo.orderedItems.push({
+                product : {
+                    key : product.key,
+                    name : product.name,
+                    image : product.image[0],
+                    price : product.price
+                },
+                quantity : data.orderedItems[i].quantity //qiuantity get by req's body (front end)
+             })
+
+
 
 
 
