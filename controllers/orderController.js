@@ -112,3 +112,62 @@ export async function addOrder(req,res){
 
 
 }
+
+
+export async function getQuote(req,res){
+    const data = req.body;
+    const orderInfo = { //its working like dummy we just assign value to this dummy by getting from the frontend
+        orderedItems : []
+
+    }
+ 
+    let oneDayCost = 0; //oneDayCost vaiable declare for store the cost of the order (price)
+
+    for(let i=0; i<data.orderedItems.length; i++){ //front endaal anuppiya product = data.orderedItems order seidha productshal
+        try{
+             const product = await Product.findOne({key : data.orderedItems[i].key}) //import product and search if there any products have related to the key that we get from order
+
+             if (product == null){
+                res.status(404).json({message : "Product with key "+data.orderedItems[i].key+" not found" })
+                return
+             }
+
+             orderInfo.orderedItems.push({
+                product : {
+                    key : product.key,
+                    name : product.name,
+                    image : product.image[0],
+                    price : product.price
+                },
+                quantity : data.orderedItems[i].quantity //qiuantity get by req's body (front end)
+             })
+
+             oneDayCost += product.price * data.orderedItems[i].quantity; //calculating the total one day cost by Product price and quantity 
+
+        }catch(e){
+            console.log(e);
+            res.status(500).json({message : "Can not make an order"})
+        }
+       
+       
+    }
+
+    orderInfo.days = data.days;
+    orderInfo.startingDate =  data.startingDate;
+    orderInfo.endingDate =  data.endingDate;
+    orderInfo.totalAmount =  oneDayCost * data.days //calculating the total amount by  totalOneday cost * how many days they want the product(day count)
+
+    try{
+           
+        res.json({
+            message : "Order quatation",
+            total : orderInfo.totalAmount,
+        })
+    }catch(e){
+        res.status(500).json({message : "Failed to get the Quotation"})
+    }
+
+
+
+
+}
