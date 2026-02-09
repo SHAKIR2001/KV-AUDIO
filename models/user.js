@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
         required : true
     },
 
+    isBlocked : {
+        type : Boolean,
+        required : true,
+        default : false
+    },
+
     role : {
         type : String,
         default : "customer"

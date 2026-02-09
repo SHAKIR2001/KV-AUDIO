@@ -40,6 +40,11 @@ export function loginUser(req,res){
             }else{
                const isPassowrdCorrect = bcrypt.compareSync(data.password,user.password);
 
+               if(user.isBlocked){
+                res.status(403).json({message : "Your account is blocked , please contact admin"})
+                return;
+               } 
+
                 if (isPassowrdCorrect){
                     const token = jwt.sign({
                         firstName : user.firstName,
@@ -84,4 +89,64 @@ export function isItCustomer(req){
     }
 
     return isCustomer;
+}
+
+export async function getAllUsers(req,res){
+try{
+    
+    if(!isItADMIN(req)){
+        res.status(403).json({
+            message : "You are not authorized to perfrom this action"
+            
+        })
+        return
+    }
+
+    const users = await User.find()
+    res.json(users)
+
+}catch(e){
+    res.status(500).json({
+        message : "Cannot get the users"
+    })
+}
+
+}
+
+export async function blockOrUnblockUser(req,res){
+    const email = req.params.email;
+
+    if(isItADMIN(req)){
+    try{
+        const user = await User.findOne({ email : email })
+
+        if(user == null){
+            res.status(404).json({
+                error : "User not found"
+            })
+        }
+
+        const isBlocked = !user.isBlocked
+
+        await User.updateOne({
+            email : email
+        },
+        {
+            isBlocked : isBlocked
+        }
+    );
+
+    res.json({message : "user bloacked/unblocked successfully"})
+  
+
+    }catch(e){
+        res.status(500).json({message : "Unabale to change user STATUS"})
+    }
+
+    }else{
+        res.status(403).json({
+            error : "Unauthorized access"
+        })
+    }
+
 }
