@@ -107,3 +107,41 @@ try{
 }
 
 }
+
+export async function blcokOrUnblockUser(req,res){
+    const email = req.params.email;
+
+    if(isItADMIN(req)){
+    try{
+        const user = User.findOne({ email : email })
+
+        if(user == null){
+            res.status(404).json({
+                error : "User not found"
+            })
+        }
+
+        const isBlocked = !user.isBlocked
+
+        await User.updateOne({
+            email : email
+        },
+        {
+            isBlocked : isBlocked
+        }
+    );
+
+    res.json({message : "user bloacked/unblocked successfully"})
+  
+
+    }catch(e){
+        res.status(500).json({message : "Unabale to change user STATUS"})
+    }
+
+    }else{
+        res.status(403).json({
+            error : "Unauthorized access"
+        })
+    }
+
+}
