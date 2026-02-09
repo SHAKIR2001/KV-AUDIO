@@ -108,7 +108,7 @@ try{
 
 }
 
-export async function blcokOrUnblockUser(req,res){
+export async function blockOrUnblockUser(req,res){
     const email = req.params.email;
 
     if(isItADMIN(req)){
