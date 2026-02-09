@@ -97,8 +97,8 @@ try{
         return
     }
 
-    const user = await User.find()
-    res.json(user)
+    const users = await User.find()
+    res.json(users)
 
 }catch(e){
     res.status(500).json({
