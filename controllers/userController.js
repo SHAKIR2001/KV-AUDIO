@@ -43,7 +43,7 @@ export function loginUser(req,res){
                if(user.isBlocked){
                 res.status(403).json({message : "Your account is blocked , please contact admin"})
                 return;
-               }
+               } 
 
                 if (isPassowrdCorrect){
                     const token = jwt.sign({
