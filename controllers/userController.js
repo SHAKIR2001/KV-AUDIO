@@ -113,7 +113,7 @@ export async function blockOrUnblockUser(req,res){
 
     if(isItADMIN(req)){
     try{
-        const user = User.findOne({ email : email })
+        const user = await User.findOne({ email : email })
 
         if(user == null){
             res.status(404).json({
