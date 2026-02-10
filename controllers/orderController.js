@@ -179,7 +179,7 @@ export async function getOrders(req,res){
         try{
 
         const orders = await Order.find()
-        res.json({orders})
+        res.json(orders)
 
         }catch(e){
             res.status(500).json({message : "Cannot get the orders"})
@@ -199,5 +199,40 @@ export async function getOrders(req,res){
     else{
         res.status(403).json({error : "Unauthorized"})
     }
+
+}
+
+export async function approveOrRejectOrder(req,res){
+    const orderId =  req.params.orderId;
+    const status = req.body.status;
+
+    if(isItADMIN(req)){
+        try{
+            const order = await Order.findOne({
+                orderId : orderId
+            })
+
+            if(order == null){
+                res.status(404).json({error : "Order not found"})
+            }
+
+            await Order.updateOne({
+                orderId : orderId
+            },
+            {
+                status : status
+            }
+        );
+        res.json({message : "Order approved/ rejected successfully"})
+        }catch(e){
+            res.status(500).json({error : "Failed to get order"})
+        }
+
+    }else{
+        res.status(403).json({error : "Unauthorized"})
+
+    }
+
+
 
 }

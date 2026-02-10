@@ -150,3 +150,11 @@ export async function blockOrUnblockUser(req,res){
     }
 
 }
+
+export function getUser(req,res){ //get the deatils who log in (this help to prevent nomral user acess the admin pages)
+    if(req.user != null){
+        res.json(req.user)
+    }else{
+        res.status(403).json({error : "Unauthorized"})
+    }
+}
