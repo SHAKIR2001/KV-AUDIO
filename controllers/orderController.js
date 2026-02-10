@@ -217,7 +217,7 @@ export async function approveOrRejectOrder(req,res){
             }
 
             await Order.updateOne({
-                orderID : orderId
+                orderId : orderId
             },
             {
                 status : status
