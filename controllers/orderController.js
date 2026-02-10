@@ -174,5 +174,15 @@ export async function getQuote(req,res){
 
 
 export async function getOrders(req,res){
+    if(isItADMIN(req)){
+        try{
+
+            const orders = await Order.find()
+            res.json({orders})
+
+        }catch(e){
+            res.status(500).json({message : "Cannot get the orders"})
+        }
+    }
 
 }
