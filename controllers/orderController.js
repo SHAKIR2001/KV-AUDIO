@@ -179,7 +179,7 @@ export async function getOrders(req,res){
         try{
 
         const orders = await Order.find()
-        res.json({orders})
+        res.json(orders)
 
         }catch(e){
             res.status(500).json({message : "Cannot get the orders"})
