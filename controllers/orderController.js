@@ -185,4 +185,18 @@ export async function getOrders(req,res){
         }
     }
 
+    if(isItCustomer(req)){
+    try{
+        const orders = await Order.find({email : req.email })
+        res.json(orders)
+    }catch(e){
+        res.status(500).json(e)
+    }
+
+    }
+
+    else{
+        
+    }
+
 }
