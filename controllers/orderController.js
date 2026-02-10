@@ -177,17 +177,17 @@ export async function getOrders(req,res){
     if(isItADMIN(req)){
         try{
 
-            const orders = await Order.find()
-            res.json({orders})
+        const orders = await Order.find()
+        res.json({orders})
 
         }catch(e){
             res.status(500).json({message : "Cannot get the orders"})
         }
     }
 
-    if(isItCustomer(req)){
+    else if(isItCustomer(req)){
     try{
-        const orders = await Order.find({email : req.email })
+        const orders = await Order.find({email : req.user.email })
         res.json(orders)
     }catch(e){
         res.status(500).json(e)
@@ -196,7 +196,7 @@ export async function getOrders(req,res){
     }
 
     else{
-        
+        res.status()
     }
 
 }
