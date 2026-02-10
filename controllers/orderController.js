@@ -174,6 +174,7 @@ export async function getQuote(req,res){
 
 
 export async function getOrders(req,res){
+    
     if(isItADMIN(req)){
         try{
 
@@ -186,17 +187,17 @@ export async function getOrders(req,res){
     }
 
     else if(isItCustomer(req)){
-    try{
+     try{
         const orders = await Order.find({email : req.user.email })
         res.json(orders)
-    }catch(e){
-        res.status(500).json(e)
-    }
+     }catch(e){
+      res.status(500).json({message : "Cannot get the orders"})
+     }
 
     }
 
     else{
-        res.status()
+        res.status(403).json({error : "Unauthorized"})
     }
 
 }
