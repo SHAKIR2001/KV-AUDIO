@@ -1,5 +1,7 @@
 import Order from "../models/order.js";
 import Product from "../models/product.js";
+import { isItCustomer, isItADMIN } from "./userController.js";
+
 
 export async function addOrder(req,res){
     const data = req.body;
@@ -167,7 +169,35 @@ export async function getQuote(req,res){
         res.status(500).json({message : "Failed to get the Quotation"})
     }
 
+}
 
 
+
+export async function getOrders(req,res){
+    
+    if(isItADMIN(req)){
+        try{
+
+        const orders = await Order.find()
+        res.json({orders})
+
+        }catch(e){
+            res.status(500).json({message : "Cannot get the orders"})
+        }
+    }
+
+    else if(isItCustomer(req)){
+     try{
+        const orders = await Order.find({email : req.user.email })
+        res.json(orders)
+     }catch(e){
+      res.status(500).json({message : "Cannot get the orders"})
+     }
+
+    }
+
+    else{
+        res.status(403).json({error : "Unauthorized"})
+    }
 
 }
