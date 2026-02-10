@@ -1,5 +1,7 @@
 import Order from "../models/order.js";
 import Product from "../models/product.js";
+import { isItCustomer, isItADMIN } from "./userController.js";
+
 
 export async function addOrder(req,res){
     const data = req.body;
@@ -167,7 +169,10 @@ export async function getQuote(req,res){
         res.status(500).json({message : "Failed to get the Quotation"})
     }
 
+}
 
 
+
+export async function getOrders(req,res){
 
 }
