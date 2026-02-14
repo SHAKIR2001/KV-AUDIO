@@ -6,6 +6,7 @@ import productRouter from "./routes/productRouter.js";
 import reviewRouter from "./routes/reviewRouter.js";
 import inquiryRouter from "./routes/inquiryRouter.js"
 import orderRouter from "./routes/orderRouter.js";
+import contactRouter from "./routes/contactRouter.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -48,6 +49,7 @@ app.use("/api/products", productRouter)
 app.use("/api/reviews", reviewRouter)
 app.use("/api/inquiries", inquiryRouter)
 app.use("/api/orders", orderRouter)
+app.use("/api/contact", contactRouter)
 
 app.listen(3000,()=>{
     console.log("Server is running on PORT 3000 🚀")
