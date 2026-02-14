@@ -2,7 +2,7 @@ import ContactMessage from "../models/contactMessage.js";
 import { isItADMIN } from "./userController.js";
 
 
-async function getNextContactMessageId() { //use to create an ID
+async function getNextContactMessageId() { //use to create an uniq ID for messages
     let id = 0;
 
     const last = await ContactMessage.find().sort({ id: -1 }).limit(1);
