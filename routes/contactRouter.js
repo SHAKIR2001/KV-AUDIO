@@ -1,12 +1,10 @@
 import express from "express";
-import { createContactMessage, getAllContactMessages } from "../controllers/contactController.js";
+import { createContactMessage, getAllContactMessages, resolveContactMessage } from "../controllers/contactController.js";
 
 const contactRouter = express.Router();
 
-// Public Contact Us form submit
 contactRouter.post("/", createContactMessage);
-
-// Admin: get all contact messages
 contactRouter.get("/", getAllContactMessages);
+contactRouter.put("/:id", resolveContactMessage);
 
 export default contactRouter;

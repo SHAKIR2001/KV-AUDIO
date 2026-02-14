@@ -39,6 +39,12 @@ const contactMessageSchema = new mongoose.Schema({
         trim: true,
     },
 
+    isResolved: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+
     createdAt: {
         type: Date,
         required: true,

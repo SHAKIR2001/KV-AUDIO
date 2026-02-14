@@ -45,3 +45,27 @@ export async function getAllContactMessages(req, res) {
         res.status(500).json({ message: "Failed to get contact messages" });
     }
 }
+
+export async function resolveContactMessage(req, res) {
+    try {
+        if (!isItADMIN(req)) {
+            res.status(403).json({ message: "You are not authorized to perform this action" });
+            return;
+        }
+
+        const id = req.params.id;
+        const result = await ContactMessage.updateOne(
+            { id: id },
+            { isResolved: true }
+        );
+
+        if (result.matchedCount === 0) {
+            res.status(404).json({ message: "Contact message not found" });
+            return;
+        }
+
+        res.json({ message: "Message marked as resolved" });
+    } catch (e) {
+        res.status(500).json({ message: "Failed to update contact message" });
+    }
+}
