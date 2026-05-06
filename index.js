@@ -16,7 +16,7 @@ dotenv.config(); //use to access the values in .env file
 const app = express();
 
 app.use(cors())
-app.use(bodyParser.json());  //idhu app = express in pirahu koduttal wendum aduththa requests(GET,POST,PUT,DELETE) nadakka mun
+app.use(bodyParser.json());  //idhu app = express in pirahu koduttal wendum aduththa requests(GET,POST,PUT,DELETE) nadakka mun //now we have an alternative solution we dont use bodyParser
 app.use( (req,res,next)=>{  //Authentication (identify the users)
 
     let token = req.header("Authorization")
@@ -52,7 +52,7 @@ app.use("/api/orders", orderRouter)
 app.use("/api/contact", contactRouter)
 
 app.listen(3000,()=>{
-    console.log("Server is running on PORT 3000 🚀")
+    console.log("Server is running on PORT 3000 ✅")
 });
 
 
